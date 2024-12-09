@@ -44,6 +44,7 @@
             groupBox3 = new GroupBox();
             lblResult = new Label();
             label6 = new Label();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -142,14 +143,14 @@
             label4.Font = new Font("TH SarabunPSK", 18F, FontStyle.Bold);
             label4.Location = new Point(21, 78);
             label4.Name = "label4";
-            label4.Size = new Size(132, 40);
+            label4.Size = new Size(218, 40);
             label4.TabIndex = 9;
-            label4.Text = "ความยาวฐาน";
+            label4.Text = "ความยาวด้านแต่ละด้าน";
             // 
             // txtHexagonWidht
             // 
             txtHexagonWidht.Font = new Font("TH SarabunPSK", 18F, FontStyle.Bold);
-            txtHexagonWidht.Location = new Point(214, 78);
+            txtHexagonWidht.Location = new Point(245, 71);
             txtHexagonWidht.Name = "txtHexagonWidht";
             txtHexagonWidht.Size = new Size(125, 47);
             txtHexagonWidht.TabIndex = 10;
@@ -207,7 +208,7 @@
             lblResult.Name = "lblResult";
             lblResult.Size = new Size(452, 310);
             lblResult.TabIndex = 15;
-            lblResult.Text = "...";
+            lblResult.Text = "0.00";
             lblResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label6
@@ -220,12 +221,23 @@
             label6.TabIndex = 16;
             label6.Text = "พื้นที่ (ตารางหน่วย)";
             // 
+            // button1
+            // 
+            button1.Location = new Point(1071, 568);
+            button1.Name = "button1";
+            button1.Size = new Size(135, 57);
+            button1.TabIndex = 17;
+            button1.Text = "clear";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1408, 857);
+            Controls.Add(button1);
             Controls.Add(label6);
             Controls.Add(lblResult);
             Controls.Add(groupBox3);
@@ -263,5 +275,6 @@
         private GroupBox groupBox3;
         private Label lblResult;
         private Label label6;
+        private Button button1;
     }
 }

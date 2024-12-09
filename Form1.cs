@@ -25,23 +25,20 @@ namespace WinFormsAppCalCTH
         {
             //input รับค่าจาก TextBox (แปลงชนิดข้อมูลเป็น double)
             double Radius = 0;
-            
+
             if (double.TryParse(txtRadius.Text, out Radius) == false)
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtRadius.Focus(); //ให้มี Cursor ที่ TextBox
-                txtRadius.SelectAll(); //ให้ Select ข้อความใน TextBox
+                ShowError(txtRadius, "กรุณากรอกค่ารัศมีที่ถูกต้อง");
                 return;
             }
 
             //process สูตรคำนวณ pi*r*r
-            double CircleArea = Math.PI * Math.Pow(Radius, 2);
+            double CircleArea = CalculateCircleArea(Radius);
             //Math.PI ให้ค่า PI
             //Math.Pow(x,y) x ยกกำลัง y
 
             //output นำไปแสดงที่ lblResult
-            lblResult.Text = CircleArea.ToString("0.00");
+            ShowResult(lblResult, CircleArea);
             txtRadius.Focus();
             txtRadius.SelectAll();
         }
@@ -54,25 +51,19 @@ namespace WinFormsAppCalCTH
 
             if (double.TryParse(txtHeight.Text, out Height) == false)
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtHeight.Focus(); //ให้มี Cursor ที่ TextBox
-                txtHeight.SelectAll(); //ให้ Select ข้อความใน TextBox
+                ShowError(txtRadius, "กรุณากรอกค่าฐานที่ถูกต้อง");
                 return;
             }
 
             if (double.TryParse(txtBase.Text, out BaseLenght) == false)
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtBase.Focus(); //ให้มี Cursor ที่ TextBox
-                txtBase.SelectAll(); //ให้ Select ข้อความใน TextBox
+                ShowError(txtRadius, "กรุณากรอกค่าสูงที่ถูกต้อง");
                 return;
             }
-            
-            double TriangleArea = 0.5 * BaseLenght * Height;
+
+            double TriangleArea = CalculateTriangleArea(BaseLenght, Height);
             //output นำไปแสดงที่ lblResult
-            lblResult.Text = TriangleArea.ToString("0.00");
+            ShowResult(lblResult, TriangleArea);
             txtHeight.Focus();
             txtHeight.SelectAll();
         }
@@ -82,14 +73,54 @@ namespace WinFormsAppCalCTH
             double SideLenght = 0;
             if (double.TryParse(txtHexagonWidht.Text, out SideLenght) == false)
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtHexagonWidht.Focus(); //ให้มี Cursor ที่ TextBox
-                txtHexagonWidht.SelectAll(); //ให้ Select ข้อความใน TextBox
+                ShowError(txtRadius, "กรุณากรอกค่าด้านที่ถูกต้อง");
                 return;
             }
-            double HexagonArea = (3*Math.Sqrt(3)/2)*Math.Pow(SideLenght, 2);
-            lblResult.Text = HexagonArea.ToString("0.00");
+            double HexagonArea = CalculateHexagonArea(SideLenght);
+            ShowResult(lblResult, HexagonArea);
+            txtHexagonWidht.Focus();
+            txtHexagonWidht.SelectAll();
+        }
+
+        private double CalculateCircleArea(double Radius)
+        {
+            return Math.PI * Math.Pow(Radius, 2);
+        }
+
+        private double CalculateTriangleArea(double BaseLenght, double Height)
+        {
+            return 0.5 * BaseLenght * Height;
+        }
+
+        private double CalculateHexagonArea(double SideLenght)
+        {
+            return (3 * Math.Sqrt(3) / 2) * Math.Pow(SideLenght, 2);
+        }
+
+        private void ShowResult(Label label, double area)
+        {
+            label.Text = area.ToString("0.00");
+        }
+
+        private void ShowError(TextBox textBox, string message)
+        {
+            MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            textBox.Focus(); //ให้มี Cursor ที่ TextBox
+            textBox.SelectAll(); //ให้ Select ข้อความใน TextBox
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            txtRadius.Text = "";
+            txtHeight.Text = "";
+            txtBase.Text = "";
+            txtHexagonWidht.Text = "";
+            lblResult.Text = "";
         }
     }
 }
